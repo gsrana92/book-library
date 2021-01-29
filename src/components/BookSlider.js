@@ -1,8 +1,16 @@
-import React from "react";
+import React  from "react";
 import Carousel from "react-elastic-carousel";
-import "../styles/BookSLider.css";
+import { connect } from "react-redux";
+import {addBook} from '../actions/books';
 
-const BookSlider = ({ library }) => {
+const BookSlider = ({ library , myBook, addBook}) => {
+
+  const handleOnClick = (book) => {
+    console.log(book);
+    addBook(book)
+    console.log(myBook)
+  };
+
   return (
     <div className="slider-wrapper">
       <Carousel
@@ -11,17 +19,20 @@ const BookSlider = ({ library }) => {
         showThumbs={false}
         infiniteLoop={true}
         itemsToScroll={4}
-        enableAutoPlay={true}
+        autoPlaySpeed={4000}
       >
-        {library &&
+        {
           library.books.map((book) => {
             return (
-              <img
-                src={book.book_image}
-                width="70%"
-                alt={book.title}
-                className="image"
-              />
+              <div key={book.rank}>
+                <img
+                  src={book.book_image}
+                  width="70%"
+                  alt={book.title}
+                  className="image"
+                />
+                <button onClick={() => handleOnClick(book)}>+</button>
+              </div>
             );
           })}
       </Carousel>
@@ -29,4 +40,18 @@ const BookSlider = ({ library }) => {
   );
 };
 
-export default BookSlider;
+const mapStateToProps = (state) => {
+  return {
+    myBook: state.myBook,
+    //filters: state.filters
+  }
+}
+
+const mapDispatchToProps = () => {
+  return{
+    addBook
+    }
+  }
+
+
+export default connect(mapStateToProps, mapDispatchToProps())(BookSlider)

@@ -1,68 +1,70 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import BookSlider from "./BookSlider";
-import '../styles/Homepage.css'
-
-const FEATURE_API =
-  "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=FBWSBGAaoqsA6icX6FAFNsozT02IGNDT";
-
-const SEARCH_API = ":keyes&key=AIzaSyCQAk_Fvz8vZFpFptY3B0sPWNph94mBal0";
+import axios from "axios";
+import { connect } from "react-redux";
+import { saveBook } from "../actions/books";
 
 
-export const HomePage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [library, setLibrary] = useState({});
+const apiKey = (input) =>
+  `https://api.nytimes.com/svc/books/v3/lists/current/${input}.json?api-key=FBWSBGAaoqsA6icX6FAFNsozT02IGNDT`;
 
+
+export const HomePage = ({ booksState, saveBook }) => {
+
+  // const [library, setLibrary] = useState({});
+  const [input, setInput] = useState("hardcover-fiction");
 
   useEffect(() => {
-    getBooks(FEATURE_API);
-  }, []);
-
-  const getBooks = (API) => {
-    fetch(API)
-      .then((res) => res.json())
+    const url = apiKey(input);
+    axios
+      .get(url)
+      // .then((res) => res.json())
       .then((data) => {
-        console.log(data.results);
-        setLibrary(data.results);
+        saveBook({collection: data.data.results});
+        // setLibrary(bookState)
       });
-  };
+  },[saveBook, input]);
 
   const handleChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (searchTerm) {
-      getBooks(
-        "https://www.googleapis.com/books/v1/volumes?q=" +
-          searchTerm +
-          SEARCH_API
-      );
-      setSearchTerm("");
-    }
+    setInput(e.target.value);
   };
+  console.log(booksState)
 
   return (
-    <div className='wrapper'>
-    <Header />
-      <form onSubmit={handleSubmit} className=''>
-        <input
-          type="text"
-          placeholder="Search..."
-          onChange={handleChange}
-          value={searchTerm}
-          className=''
-        />
-      </form>
+    <div className="wrapper">
+      <Header />
+      <select onChange={handleChange}>
+        <option value="hardcover-fiction" defaultValue>
+          Hardcover Fiction
+        </option>
+        <option value="hardcover-nonfiction">Hardcover Nonfiction</option>
+        <option value="paperback-nonfiction">Paperback Nonfiction</option>
 
-        {library &&
-          library.books &&
-          library.books.length > 0 &&
-          <BookSlider library={library} />}
+        <option value="e-book-fiction">E-book Fiction</option>
+      </select>
+{/* <div>{JSON.stringify(bookState)}</div>
+  */}      { booksState && booksState.books && booksState.books.length > 0 && (
+        <BookSlider library={booksState} />
+      ) }
     </div>
   );
 };
 
-export default HomePage;
+const mapStateToProps = (state) => {
+  return {
+    booksState: state.books,
+    //filters: state.filters
+  }
+}
+
+const mapDispatchToProps = () => {
+  return{
+    saveBook
+    }
+  }
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps())(HomePage)
