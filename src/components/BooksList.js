@@ -1,20 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
+import { removeBook } from "../actions/books";
 
-const BooksList = ({ bookList }) => {
-
-  const handleOnClickRemove = () => {
-    console.log('book removed')
-  }
+const BooksList = ({ bookList, id, removeBook }) => {
   return (
     <div>
       <h1> My Books List</h1>
       <div>
-        {bookList.map((myBook) => {
+        {bookList.map((book) => {
           return (
-            <div>
-              <img src={myBook.book_image} alt={myBook.title} />
-              <button onClick = {handleOnClickRemove}>-</button>
+            <div key={book.id}>
+              <img
+                src={book.book_image}
+                alt={book.title}
+                width="30%"
+                className="image"
+              />
+              <h3>{book.title}</h3>
+              <p>{book.id}</p>
+              <button onClick={() => removeBook({id: book.id})}>-</button>
             </div>
           );
         })}
@@ -23,11 +27,16 @@ const BooksList = ({ bookList }) => {
   );
 };
 
-const mapStateToProps = (state) =>{
-  return {
-    myBook: state.myBook
-    
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     myBook: state.myBook,
+//   };
+// };
 
-export default connect(mapStateToProps)(BooksList);
+const mapDispatchToProps = () => {
+  return {
+    removeBook,
+  };
+};
+
+export default connect(undefined, mapDispatchToProps())(BooksList);
