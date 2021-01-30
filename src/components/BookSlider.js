@@ -12,7 +12,7 @@ const BookSlider = ({ library , myBook, addBook}) => {
   };
 
   return (
-    <div className="slider-wrapper">
+    <div className="slider-wrapper content-container">
       <Carousel
         itemsToShow={4}
         showArrows={true}
@@ -24,18 +24,21 @@ const BookSlider = ({ library , myBook, addBook}) => {
         {
           library.books.map((book) => {
             return (
-              <div key={book.rank}>
+              <div key={book.rank} className='images-div'>
                 <img
                   src={book.book_image}
                   width="70%"
                   alt={book.title}
                   className="image"
                 />
-                <button onClick={() => handleOnClick(book)}>+</button>
+                <button onClick={() => handleOnClick(book)} className='button'>+</button>
+
               </div>
+
             );
           })}
       </Carousel>
+
     </div>
   );
 };

@@ -1,0 +1,23 @@
+.home-wrapper{
+    background-color:white;
+    font-size: $l-size;
+    font-weight: bold;
+    height: 100vh;
+    span{
+        font-family: cursive;
+        font-size: $l-size;
+        text-align: center;
+    }
+
+}
+
+.select{
+    background-color: white;
+    font-family: sans-serif;
+    font-size: $font-size-large;
+    font-weight: 300;
+    pad: $s-size;
+    height: 30px;
+    margin-bottom: $s-size;
+    margin-top: 0;
+}

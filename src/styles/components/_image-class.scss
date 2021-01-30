@@ -1,0 +1,26 @@
+.images-div{
+    justify-content: space-between;
+    position: relative;
+}
+
+.image{
+    height: 300px;
+    width: 200px;
+    border-radius: 2px;
+}
+
+.button {
+    position: absolute;
+    width: 200px;
+    left:0;
+    top: 180px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity .35s ease;
+    border: 2px solid red;
+    justify-content: center;
+  }
+
+.images-div:hover .button{
+    opacity: 1;
+  }
