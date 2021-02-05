@@ -29,11 +29,10 @@ export const HomePage = ({ booksState, saveBook }) => {
       <Header />
 
       <div className="content-container title">
-      <span>"New York Times bestseller this week"</span>
+        <span>"New York Times bestseller this week"</span>
 
-
-        <div>
-          Sort by:
+        <div className="select-filter">
+          Genre:
           <select onChange={handleChange} className="select">
             <option value="hardcover-fiction" defaultValue>
               Hardcover Fiction
@@ -43,7 +42,6 @@ export const HomePage = ({ booksState, saveBook }) => {
 
             <option value="e-book-fiction">E-book Fiction</option>
           </select>
-
         </div>
       </div>
 

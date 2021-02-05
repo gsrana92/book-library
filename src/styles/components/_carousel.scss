@@ -1,0 +1,7 @@
+.carousel{
+    @media (min-width: $desktop-breakpoint) {
+        flex-direction: column;
+        margin-bottom: $l-size;
+        
+    }
+}

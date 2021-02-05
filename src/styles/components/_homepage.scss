@@ -1,5 +1,5 @@
 .home-wrapper{
-    background-color:white;
+    background-color:rgba(235, 229, 230, 0.342);
     font-size: $l-size;
     font-weight: bold;
     height: 100vh;
@@ -21,3 +21,16 @@
     margin-bottom: $s-size;
     margin-top: 0;
 }
+
+.title{
+    color: black
+  
+  }
+  
+.select-filter{
+    color: black;
+    font-size: $m-size;
+    font-family: sans-serif;
+    margin-left: 0;
+  }
+  

@@ -1,12 +1,27 @@
 .images-div{
     justify-content: space-between;
     position: relative;
+    @media (min-width: $desktop-breakpoint) {
+        flex-direction: column;
+        margin-bottom: $l-size;
+        
+    }
+
+    
+    p{
+        font-size: $m-size;
+    }
 }
 
 .image{
     height: 300px;
     width: 200px;
     border-radius: 2px;
+    @media (min-width: $desktop-breakpoint) {
+        flex-direction: row;
+        margin-bottom: $l-size;
+        
+    }
 }
 
 .button {

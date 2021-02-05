@@ -1,19 +1,20 @@
 import React  from "react";
 import Carousel from "react-elastic-carousel";
 import { connect } from "react-redux";
-import {addBook} from '../actions/books';
+import {startAddBook} from '../actions/books';
 
-const BookSlider = ({ library , myBook, addBook}) => {
+const BookSlider = ({ library , myBook, startAddBook}) => {
 
   const handleOnClick = (book) => {
     console.log(book);
-    addBook(book)
+    startAddBook(book)
     console.log(myBook)
   };
 
   return (
     <div className="slider-wrapper content-container">
       <Carousel
+        className='carousel'
         itemsToShow={4}
         showArrows={true}
         showThumbs={false}
@@ -31,6 +32,7 @@ const BookSlider = ({ library , myBook, addBook}) => {
                   alt={book.title}
                   className="image"
                 />
+                <p>{book.description}</p>
                 <button onClick={() => handleOnClick(book)} className='button'>+</button>
 
               </div>
@@ -52,7 +54,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = () => {
   return{
-    addBook
+    startAddBook
     }
   }
 

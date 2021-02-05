@@ -9,6 +9,9 @@ export const myBookReducer = (state = bookDefaultState, action) => {
     case "REMOVE_BOOK":
       //console.log(action.id);
       return state.filter(({id}) => id !==action.id);
+    
+    case 'SET_BOOKS':
+      return action.books
 
     default:
       return state;

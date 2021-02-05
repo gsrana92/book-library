@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { removeBook } from "../actions/books";
+import {  startRemoveBook } from "../actions/books";
 
-const BooksList = ({ bookList, id, removeBook }) => {
+const BooksList = ({ bookList, id, startRemoveBook }) => {
   return (
     <div>
+    <div className='content-container'>
       <h1> My Books List</h1>
       <div>
         {bookList.map((book) => {
@@ -18,11 +19,12 @@ const BooksList = ({ bookList, id, removeBook }) => {
               />
               <h3>{book.title}</h3>
               <p>{book.id}</p>
-              <button onClick={() => removeBook({id: book.id})}>-</button>
+              <button onClick={() => startRemoveBook({id: book.id})}>-</button>
             </div>
           );
         })}
       </div>
+    </div>
     </div>
   );
 };
@@ -35,7 +37,7 @@ const BooksList = ({ bookList, id, removeBook }) => {
 
 const mapDispatchToProps = () => {
   return {
-    removeBook,
+    startRemoveBook,
   };
 };
 

@@ -1,9 +1,14 @@
-import React from "react";
+import React, {useEffect,} from "react";
 import Header from './Header';
 import BooksList from './BooksList';
 import { connect } from "react-redux";
+import { startSetBooks } from "../actions/books";
 
-export const Library = ({myBookList}) => {
+export const Library = ({myBookList, startSetBooks}) => {
+
+  useEffect(() => {
+    startSetBooks()
+  }, [startSetBooks])
 
 
   return (
@@ -21,4 +26,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Library);
+const mapDispatchToProps = () => {
+  return{
+    startSetBooks
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps())(Library);
